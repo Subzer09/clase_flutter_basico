@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../widgets/avatar.dart';
+import '../widgets/button_menu.dart';
 import '../widgets/circle_container.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,11 +14,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigationBar(items : [
-        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
-        BottomNavigationBarItem(icon: Icon(Icons.list), title: Text("List")),
-        BottomNavigationBarItem(icon: Icon(Icons.person), title: Text("Profile")),
-      ]),
+      bottomNavigationBar: ButtonMenu(items: [
+        BottonMenuItem(iconPath: 'assets/icons/open-menu.svg', label: 'Inicio'),
+        BottonMenuItem(iconPath: 'assets/icons/historial.svg', label: 'Historial'),
+        BottonMenuItem(iconPath: 'assets/icons/sheet.svg', label: 'Ofertas'),
+        BottonMenuItem(iconPath: 'assets/icons/meter.svg', label: 'Mi perfil'),
+      ],
+      ),
       body: SafeArea(
         top: true,
         bottom: false,
@@ -27,29 +32,23 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Text("Bienvenido", style: TextStyle(fontSize: 35, fontWeight: FontWeight.w200),),
+              Avatar(),
+              SizedBox(height: 20,),
+              Text("Bienvenido", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w200),),
               Text("Jimmy Niels", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              Container(
-                height: 1,
-                width: 100,
-                margin: EdgeInsets.symmetric(vertical: 20),
-                color: Color(0xffaaaaaa),
+              FlatButton( 
+                child: Text('UPLOAD', style: TextStyle(color: Colors.white),),
+                color: Colors.blue, 
+                onPressed: (){
+                  print("Uploading");
+                }
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                        Text("14 likes"),
-                        SizedBox(width: 10),
-                        CircleContainer(child: Icon(Icons.add), width: 55, height: 55,),
-                    ],
-                  ),
-                 
-                  CircleContainer(child: Icon(Icons.remove), width: 55, height: 55,),
-                ],
+              CupertinoButton(
+                child: Text('DESCARGAR'), 
+                color: Colors.blue,
+                minSize: 30,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                onPressed: () => print("Descargando"),
               )
             ],
           )
